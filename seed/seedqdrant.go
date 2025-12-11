@@ -15,18 +15,10 @@ func SeedGCOperations() {
 		fmt.Println("hello")
 	}
 
-	embedAdd, err := m.EmbedText("Add event to my calendar")
 	index := search.NewIndex[string]()
-	index.Add(embedAdd, "Add event to my calendar")
 
-	embedDelete, err := m.EmbedText("Delete event from my calendar")
-	index.Add(embedDelete, "Delete event from my calendar")
-
-	embedUpdate, err := m.EmbedText("Update event on my calendar")
-	index.Add(embedUpdate, "Update event from my calendar")
-
-	embedListEventsForToday, err := m.EmbedText("List events for today")
-	index.Add(embedListEventsForToday, "List events for today")
+	embedUpdate, err := m.EmbedText("List events for today")
+	index.Add(embedUpdate, "List events for today")
 
 	defer m.Close()
 
@@ -34,7 +26,6 @@ func SeedGCOperations() {
 		Host: "localhost",
 		Port: 6334,
 	})
-	fmt.Println(len(embedAdd), len(embedDelete), len(embedUpdate))
 	client.CreateCollection(context.Background(), &qdrant.CreateCollection{
 		CollectionName: "gc_operations",
 		VectorsConfig: qdrant.NewVectorsConfig(&qdrant.VectorParams{
@@ -46,24 +37,10 @@ func SeedGCOperations() {
 	operationInfo, err := client.Upsert(context.Background(), &qdrant.UpsertPoints{
 		CollectionName: "gc_operations",
 		Points: []*qdrant.PointStruct{
-			{
-				Id:      qdrant.NewIDNum(1),
-				Vectors: qdrant.NewVectors(embedAdd...),
-				Payload: qdrant.NewValueMap(map[string]any{"operation": "Add"}),
-			},
-			{
-				Id:      qdrant.NewIDNum(2),
-				Vectors: qdrant.NewVectors(embedDelete...),
-				Payload: qdrant.NewValueMap(map[string]any{"operation": "Delete"}),
-			},
-			{
-				Id:      qdrant.NewIDNum(3),
-				Vectors: qdrant.NewVectors(embedUpdate...),
-				Payload: qdrant.NewValueMap(map[string]any{"operation": "Update"}),
-			},
+
 			{
 				Id:      qdrant.NewIDNum(4),
-				Vectors: qdrant.NewVectors(embedListEventsForToday...),
+				Vectors: qdrant.NewVectors(embedUpdate...),
 				Payload: qdrant.NewValueMap(map[string]any{"operation": "List"}),
 			},
 		},

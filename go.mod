@@ -6,6 +6,7 @@ require (
 	cloud.google.com/go/auth v0.17.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
+	github.com/AlekSi/pointer v1.0.0 // indirect
 	github.com/alphacep/vosk-api/go v0.3.50 // indirect
 	github.com/coder/websocket v1.8.14 // indirect
 	github.com/ebitengine/purego v0.9.1 // indirect
@@ -21,6 +22,8 @@ require (
 	github.com/kelindar/iostream v1.4.0 // indirect
 	github.com/kelindar/search v0.4.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
+	github.com/olebedev/when v1.1.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/qdrant/go-client v1.16.2 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.63.0 // indirect
